@@ -17,6 +17,33 @@ newQuote.onclick = function showRandomQuote(){
 }
 
 function createAddQuoteForm() {
+    const formContainer = document.getElementById('addQuoteForm');
+
+    // Create input for quote text
+    const inputText = document.createElement('input');
+    inputText.setAttribute('id', 'newQuoteText');
+    inputText.setAttribute('type', 'text');
+    inputText.setAttribute('placeholder', 'Enter a new quote');
+
+    // Create input for quote category
+    const inputCategory = document.createElement('input');
+    inputCategory.setAttribute('id', 'newQuoteCategory');
+    inputCategory.setAttribute('type', 'text');
+    inputCategory.setAttribute('placeholder', 'Enter quote category');
+
+    // Create add quote button
+    const addButton = document.createElement('button');
+    addButton.textContent = 'Add Quote';
+    addButton.addEventListener('click', addQuote);
+
+    // Append elements to the form container
+    formContainer.appendChild(inputText);
+    formContainer.appendChild(inputCategory);
+    formContainer.appendChild(addButton);
+}
+
+// Function to add a new quote
+function addQuote() {
     const quoteText = document.getElementById('newQuoteText').value;
     const quoteCategory = document.getElementById('newQuoteCategory').value;
 
@@ -24,13 +51,11 @@ function createAddQuoteForm() {
         quotes.push({ text: quoteText, category: quoteCategory });
         document.getElementById('newQuoteText').value = '';
         document.getElementById('newQuoteCategory').value = '';
-        window.alert('New Quote added');
+        alert('Quote added successfully!');
     } else {
         alert('Please enter both a quote and a category.');
     }
 }
 
-
-
-
-
+// Initialize the add quote form when the page loads
+createAddQuoteForm();
