@@ -57,5 +57,49 @@ function addQuote() {
     }
 }
 
-// Initialize the add quote form when the page loads
+
+function loadQuotes() {
+    const storedQuotes = localStorage.getItem('quotes');
+    if (storedQuotes) {
+        quotes = JSON.parse(storedQuotes);
+    } else {
+        quotes = [
+            { text: "The only way to do great work is to love what you do.", category: "Inspiration" },
+            { text: "Life is what happens when you're busy making other plans.", category: "Life" },
+            { text: "Success is not the key to happiness. Happiness is the key to success.", category: "Success" }
+        ];
+        saveQuotes(); // Save initial quotes to local storage
+    }
+}
+
+// Save quotes to local storage
+function saveQuotes() {
+    localStorage.setItem('quotes', JSON.stringify(quotes));
+}
+
+function exportToJson() {
+    const dataStr = JSON.stringify(quotes, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'quotes.json';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+// Function to import quotes from a JSON file
+function importFromJsonFile(event) {
+    const fileReader = new FileReader();
+    fileReader.onload = function (event) {
+        const importedQuotes = JSON.parse(event.target.result);
+        quotes.push(...importedQuotes);
+        saveQuotes();
+        alert('Quotes imported successfully!');
+    };
+    fileReader.readAsText(event.target.files[0]);
+}
+
+// Initialize the add quote form and load quotes when the page loads
 createAddQuoteForm();
+loadQuotes();
