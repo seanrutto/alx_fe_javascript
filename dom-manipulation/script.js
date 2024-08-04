@@ -9,7 +9,7 @@ let quotes = [
     {text:"Maybe life is random, but I doubt it 4.", category:"Life 4"},
 ]
 
-newQuote.onclick = function displayRandomQuote(){
+newQuote.onclick = function showRandomQuote(){
     let maxi = quotes.length;
     index = Math.floor(Math.random() * maxi)
     let randomQuote = quotes[index].text;
