@@ -16,7 +16,7 @@ newQuote.onclick = function showRandomQuote(){
     quoteDisplay.innerHTML = randomQuote;
 }
 
-function addQuote() {
+function createAddQuoteForm() {
     const quoteText = document.getElementById('newQuoteText').value;
     const quoteCategory = document.getElementById('newQuoteCategory').value;
 
