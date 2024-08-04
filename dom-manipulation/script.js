@@ -24,7 +24,7 @@ function createAddQuoteForm() {
         quotes.push({ text: quoteText, category: quoteCategory });
         document.getElementById('newQuoteText').value = '';
         document.getElementById('newQuoteCategory').value = '';
-        window.alert('New Quote Added');
+        window.alert('New Quote added');
     } else {
         alert('Please enter both a quote and a category.');
     }
