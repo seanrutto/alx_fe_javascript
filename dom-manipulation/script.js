@@ -16,6 +16,21 @@ newQuote.onclick = function showRandomQuote(){
     quoteDisplay.innerHTML = randomQuote;
 }
 
+function addQuote() {
+    const quoteText = document.getElementById('newQuoteText').value;
+    const quoteCategory = document.getElementById('newQuoteCategory').value;
+
+    if (quoteText && quoteCategory) {
+        quotes.push({ text: quoteText, category: quoteCategory });
+        document.getElementById('newQuoteText').value = '';
+        document.getElementById('newQuoteCategory').value = '';
+        window.alert('New Quote Added');
+    } else {
+        alert('Please enter both a quote and a category.');
+    }
+}
+
+
 
 
 
