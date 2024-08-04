@@ -3,7 +3,7 @@ const serverUrl = "https://jsonplaceholder.typicode.com/posts"; // Placeholder U
 let quotes = [];
 
 // Load quotes from local storage
-function loadQuotes() {
+function fetchQuotesFromServer() {
     const storedQuotes = localStorage.getItem("quotes");
     if (storedQuotes) {
         quotes = JSON.parse(storedQuotes);
