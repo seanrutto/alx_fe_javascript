@@ -104,7 +104,7 @@ function importFromJsonFile(event) {
 createAddQuoteForm();
 loadQuotes();
 
-function populateCategoryFilter() {
+function populateCategories() {
     const categoryFilter = document.getElementById('categoryFilter');
     const categories = [...new Set(quotes.map(quote => quote.category))];
 
