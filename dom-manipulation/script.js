@@ -103,3 +103,56 @@ function importFromJsonFile(event) {
 // Initialize the add quote form and load quotes when the page loads
 createAddQuoteForm();
 loadQuotes();
+
+function populateCategoryFilter() {
+    const categoryFilter = document.getElementById('categoryFilter');
+    const categories = [...new Set(quotes.map(quote => quote.category))];
+
+    // Clear existing options except "All Categories"
+    categoryFilter.innerHTML = '<option value="all">All Categories</option>';
+
+    // Populate categories
+    categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category;
+        categoryFilter.appendChild(option);
+    });
+
+    // Set the selected category based on local storage
+    const selectedCategory = localStorage.getItem('selectedCategory');
+    if (selectedCategory) {
+        categoryFilter.value = selectedCategory;
+    }
+}
+
+// Function to filter quotes based on the selected category
+function filterQuotes() {
+    const categoryFilter = document.getElementById('categoryFilter');
+    const selectedCategory = categoryFilter.value;
+    localStorage.setItem('selectedCategory', selectedCategory);
+    showFilteredQuotes();
+}
+
+// Function to display filtered quotes
+function showFilteredQuotes() {
+    const filteredQuotes = getFilteredQuotes();
+    if (filteredQuotes.length === 0) {
+        document.getElementById('quoteDisplay').innerHTML = 'No quotes available for this category.';
+    } else {
+        const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
+        const randomQuote = filteredQuotes[randomIndex];
+        document.getElementById('quoteDisplay').innerHTML = `"${randomQuote.text}" - ${randomQuote.category}`;
+    }
+}
+
+// Helper function to get quotes based on selected category
+function getFilteredQuotes() {
+    const categoryFilter = document.getElementById('categoryFilter');
+    const selectedCategory = categoryFilter.value;
+    if (selectedCategory === 'all') {
+        return quotes;
+    } else {
+        return quotes.filter(quote => quote.category === selectedCategory);
+    }
+}
