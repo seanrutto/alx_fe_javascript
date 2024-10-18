@@ -158,6 +158,7 @@ function importFromJsonFile(event) {
 async function syncQuotes() {
     const serverQuotes = await fetchQuotesFromServer();
     syncLocalWithServer(serverQuotes);
+    notifyUser("Quotes synced with server!");
 }
 
 // Start syncing data with the server periodically
