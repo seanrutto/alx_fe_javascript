@@ -154,12 +154,15 @@ function importFromJsonFile(event) {
     fileReader.readAsText(event.target.files[0]);
 }
 
+// Sync local quotes with server quotes
+async function syncQuotes() {
+    const serverQuotes = await fetchQuotesFromServer();
+    syncLocalWithServer(serverQuotes);
+}
+
 // Start syncing data with the server periodically
 function startDataSync() {
-    setInterval(async () => {
-        const serverQuotes = await fetchQuotesFromServer();
-        syncLocalWithServer(serverQuotes);
-    }, 5000); // Sync every 5 seconds
+    setInterval(syncQuotes, 5000); // Sync every 5 seconds
 }
 
 // Sync local data with server data and handle conflicts
